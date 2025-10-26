@@ -1,4 +1,5 @@
 import DataUser from "./lib/getData";
+import DataView from "./ui/DataView";
 import Header from "./ui/Header";
 import SideBar from "./ui/SideBar";
 
@@ -10,12 +11,9 @@ export default function Home() {
       <Header/>
       {/* side bar */}
       <SideBar/>
-
-
-      
       {/* table */}
-      <div className="flex ">
-      <DataUser/>
+    <div className="flex items-start mt-10 min-h-screen justify-center">
+      <DataView/>
       </div>
     </>
   );

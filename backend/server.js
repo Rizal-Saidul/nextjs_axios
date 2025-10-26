@@ -5,24 +5,27 @@ const app = express()
 const PORT = 3002
 
 app.use(cors())
+app.use(express.json())
 
-const membersData = [
+let membersData = [
     {
         id: 1,
         name: "saidul rizal",
         mobile: "12345",
-        email: "1245@example.com"
+        email: "1245@example.com",
+        status: "active"
     },
     {
         id: 2,
         name: "rizal saidul",
         mobile: "54321",
-        email: "4321@example.com"
+        email: "4321@example.com",
+        status: "inactive"
     },
 ]
 
 
-const nextId = 3
+let nextId = 3
 
 app.get('/data', (req, res) => {
     // res.status(200).json({
@@ -30,6 +33,25 @@ app.get('/data', (req, res) => {
     //     membersData
     // })
     res.status(200).json(membersData)
+})
+
+app.post('/data', (req ,res) => {
+    const { name, mobile, email, status } = req.body;
+
+    if (!name || !mobile || !email || !status) {
+        res.status(400).json({message: "semua component harus di isi", Error})
+    }
+
+    const newUser = {
+        id : nextId++,
+        name,
+        mobile,
+        email,
+        status
+    }
+
+    membersData.push(newUser);
+    res.status(201).json({message: 'data berhasil ditambahkan'})
 })
 
 app.listen(PORT, () => {
